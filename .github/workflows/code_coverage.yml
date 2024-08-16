@@ -5,8 +5,7 @@ name: Code Coverage
 # Controls when the action will run. Triggers the workflow on pull request
 # events or push events in the develop branch.
 on:
-  pull_request_target:
-    types: [assigned, opened, synchronize, reopened]
+  pull_request:
   push:
     branches:
       # Push events on develop branch
