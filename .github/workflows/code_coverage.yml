@@ -317,8 +317,16 @@ jobs:
     # if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
-      - name: Sleep for 20 seconds
-        run: sleep 20
+      - name: Sleep for 40 seconds
+        run: sleep 40
+
+      - name: Download report artifact 
+        uses: actions/download-artifact@v4
+        with:
+          name: my-report
+
+      - name: Display artifact content
+        run: cat report.txt
         
       # - name: Download Generated Markdown Report
       #   uses: actions/download-artifact@v4
