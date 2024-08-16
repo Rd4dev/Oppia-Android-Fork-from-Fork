@@ -341,26 +341,26 @@ jobs:
   #     - name: Display artifact content
   #       run: cat report.txt
 
-       - name: Get most recent successful run
-         id: get-successful-run
-         uses: actions/github-script@v7  
-         with:
-           github-token: ${{ secrets.GITHUB_TOKEN }}
-           script: |
-             const { data } = await github.rest.actions.listWorkflowRuns({
-               owner: context.repo.owner,
-               repo: context.repo.repo,
-               workflow_id: 'main.yaml',
-               status: 'completed',
-             });
+        - name: Get most recent successful run
+          id: get-successful-run
+          uses: actions/github-script@v7  
+          with:
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+            script: |
+              const { data } = await github.rest.actions.listWorkflowRuns({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                workflow_id: 'main.yaml',
+                status: 'completed',
+              });
 
-             const successfulRun = data.workflow_runs.find(run => run.conclusion === 'success');
+              const successfulRun = data.workflow_runs.find(run => run.conclusion === 'success');
 
-             if (!successfulRun) {
-               return { runId: null, found: false };
-             }
+              if (!successfulRun) {
+                return { runId: null, found: false };
+              }
 
-             return { runId: successfulRun.id, found: true };
+              return { runId: successfulRun.id, found: true };
 
   # publish_coverage_report:
   #   name: Publish Code Coverage Report
