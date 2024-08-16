@@ -508,11 +508,11 @@ jobs:
   #     #   with:
   #     #     name: final-coverage-report
 
-  #     - name: Upload Coverage Report as PR Comment
-  #       uses: peter-evans/create-or-update-comment@v4
-  #       with:
-  #         issue-number: 2
-  #         body-path: 'report.txt'
+      - name: Upload Coverage Report as PR Comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body-path: 'report.txt'
 
   # # Reference: https://github.community/t/127354/7.
   # check_coverage_results:
