@@ -325,7 +325,7 @@ jobs:
         with:
           name: my-report
           github-token: ${{ secrets.GH_PAT }}
-          run-id: gh api /repos/$GITHUB_REPOSITORY/actions/runs | jq -r ‘.[] | select(.name == “C3_Workflow”) | .[0].id’
+          run-id: gh api /repos/$GITHUB_REPOSITORY/actions/runs | jq -r ‘.[] | select(.name == “C3_workflow”) | .[0].id’
 
       - name: Display artifact content
         run: cat report.txt
