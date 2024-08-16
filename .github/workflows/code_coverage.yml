@@ -313,11 +313,11 @@ jobs:
   #         name: final-coverage-report
   #         path: coverage_reports/CoverageReport.md
 
-  # download-artifact:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Sleep for 40 seconds
-  #       run: sleep 40
+  simulating-sleep:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sleep for 40 seconds
+        run: sleep 40
         
   #     - name: Checkout code
   #       uses: actions/checkout@v3
