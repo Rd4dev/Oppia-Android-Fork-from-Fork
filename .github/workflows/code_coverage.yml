@@ -7,7 +7,7 @@ name: Code Coverage
 
 on:
   workflow_run:
-    workflows: ["C3_workflow"]
+    workflows: ["C3"]
     types:
       - completed
 
@@ -358,8 +358,8 @@ jobs:
       - name: Download report artifact 
         uses: actions/download-artifact@v4
         with:
-          name: my-report
-          github-token: ${{ secrets.GH_PAT }}
+          name: report
+          github-token: ${{ github.token }}
           run-id: ${{ github.event.workflow_run.id }}
 
       - name: Display artifact content
