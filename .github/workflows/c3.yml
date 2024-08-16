@@ -1,7 +1,9 @@
 name: C3_workflow
 
-on: 
-  pull_request:
+on:
+  pull_request_target:
+    branches:
+      - develop
   push:
 
 jobs:
