@@ -3,7 +3,7 @@ name: C1 workflow
 on: push
 
 jobs:
-  upload-artifact:
+  before-publish-upload-artifact:
     runs-on: ubuntu-20.04
     steps:
       - name: Create artifact A1
