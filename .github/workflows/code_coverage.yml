@@ -358,7 +358,7 @@ jobs:
               status: 'success'
             });
             const runs = runsResponse.data.workflow_runs;
-            runs.sort((a, b) => b.created_at.getTime() - a.created_at.getTime());
+            runs.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
             const run = runs[0];
             if (!run) {
               core.setFailed('Could not find a successful workflow run for the PR');
