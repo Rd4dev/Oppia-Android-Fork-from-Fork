@@ -4,13 +4,20 @@ name: Code Coverage
 
 # Controls when the action will run. Triggers the workflow on pull request
 # events or push events in the develop branch.
+
 on:
-  pull_request_target:
-    types: [assigned, opened, synchronize, reopened]
-  push:
-    branches:
-      # Push events on develop branch
-      - develop
+  workflow_run:
+    workflows: ["C3_workflow"]
+    types:
+      - completed
+
+# on:
+#   pull_request_target:
+#     types: [assigned, opened, synchronize, reopened]
+#   push:
+#     branches:
+#       # Push events on develop branch
+#       - develop
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -306,33 +313,33 @@ jobs:
   #         name: final-coverage-report
   #         path: coverage_reports/CoverageReport.md
 
-  download-artifact:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Sleep for 40 seconds
-        run: sleep 40
+  # download-artifact:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Sleep for 40 seconds
+  #       run: sleep 40
         
-      - name: Checkout code
-        uses: actions/checkout@v3
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      - name: Fetch Workflow Run ID
-        id: get_run_id
-        run: |
-          run_id=$(gh api /repos/${GITHUB_REPOSITORY}/actions/runs \
-            | jq -r '.workflow_runs[] | select(.name == "C3_workflow") | .id' \
-            | head -n 1)
-          echo "${run_id}"
-          echo "run_id=${run_id}" >> $GITHUB_ENV
+  #     - name: Fetch Workflow Run ID
+  #       id: get_run_id
+  #       run: |
+  #         run_id=$(gh api /repos/${GITHUB_REPOSITORY}/actions/runs \
+  #           | jq -r '.workflow_runs[] | select(.name == "C3_workflow") | .id' \
+  #           | head -n 1)
+  #         echo "${run_id}"
+  #         echo "run_id=${run_id}" >> $GITHUB_ENV
 
-      - name: Download Report Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: my-report
-          github-token: ${{ secrets.GH_PAT }}
-          run-id: ${{ env.run_id }}
+  #     - name: Download Report Artifact
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: my-report
+  #         github-token: ${{ secrets.GH_PAT }}
+  #         run-id: ${{ env.run_id }}
 
-      - name: Display artifact content
-        run: cat report.txt
+  #     - name: Display artifact content
+  #       run: cat report.txt
 
   publish_coverage_report:
     name: Publish Code Coverage Report
@@ -353,7 +360,7 @@ jobs:
         with:
           name: my-report
           github-token: ${{ secrets.GH_PAT }}
-          run-id: gh api /repos/$GITHUB_REPOSITORY/actions/runs | jq -r ‘.[] | select(.name == “C3_workflow”) | .[0].id’
+          run-id: ${{ github.event.workflow_run.id }}
 
       - name: Display artifact content
         run: cat report.txt
