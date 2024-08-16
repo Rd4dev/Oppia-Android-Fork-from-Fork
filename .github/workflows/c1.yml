@@ -1,4 +1,4 @@
-name: C1 workflow
+name: C1_workflow
 
 on: push
 
@@ -7,11 +7,11 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Create artifact A1
-        run: echo "This is an artifact from c1" > artifact.txt
+        run: echo "This is an artifact from C1" > artifact.txt
 
       - name: Uploading A1 as artifact
         uses: actions/upload-artifact@v4
         with:
           name: my-artifact
           path: artifact.txt
-        
+          
