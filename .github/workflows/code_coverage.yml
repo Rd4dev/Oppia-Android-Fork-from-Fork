@@ -321,6 +321,7 @@ jobs:
           run_id=$(gh api /repos/${GITHUB_REPOSITORY}/actions/runs \
             | jq -r '.workflow_runs[] | select(.name == "C3_workflow") | .id' \
             | head -n 1)
+          echo "${run_id}"
           echo "run_id=${run_id}" >> $GITHUB_ENV
 
       - name: Download Report Artifact
@@ -328,7 +329,6 @@ jobs:
         with:
           name: my-report
           github-token: ${{ secrets.GH_PAT }}
-          repository: Rd4dev/Oppia-Android-Fork-from-Fork
           run-id: ${{ env.run_id }}
 
       - name: Display artifact content
