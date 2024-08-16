@@ -331,15 +331,15 @@ jobs:
   #         echo "${run_id}"
   #         echo "run_id=${run_id}" >> $GITHUB_ENV
 
-      - name: Download Report Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: my-report
-          github-token: ${{ secrets.GH_PAT }}
-          run-id: ${{ env.run_id }}
+      # - name: Download Report Artifact
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: my-report
+      #     github-token: ${{ secrets.GH_PAT }}
+      #     run-id: ${{ env.run_id }}
 
-      - name: Display artifact content
-        run: cat report.txt
+      # - name: Display artifact content
+      #   run: cat report.txt
 
       - name: Find CI workflow run for PR
         id: find-workflow-run
@@ -366,26 +366,26 @@ jobs:
             }
             core.setOutput('run-id', run.id);  
 
-  # publish_coverage_report:
-  #   name: Publish Code Coverage Report
-  #   # needs: evaluate-code-coverage-reports
-  #   permissions:
-  #     pull-requests: write
+  publish_coverage_report:
+    name: Publish Code Coverage Report
+    # needs: evaluate-code-coverage-reports
+    permissions:
+      pull-requests: write
 
-  #   # # The expression if: ${{ !cancelled() }} runs a job or step regardless of its success or failure while responding to cancellations,
-  #   # # serving as a cancellation-compliant alternative to if: ${{ always() }} in concurrent workflows.
-  #   # if: ${{ !cancelled() }}
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Download report artifact 
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         name: report
-  #         github-token: ${{ github.token }}
-  #         run-id: ${{ github.event.workflow_run.id }}
+    # # The expression if: ${{ !cancelled() }} runs a job or step regardless of its success or failure while responding to cancellations,
+    # # serving as a cancellation-compliant alternative to if: ${{ always() }} in concurrent workflows.
+    # if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download report artifact 
+        uses: actions/download-artifact@v4
+        with:
+          name: report
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.find-workflow-run.outputs.run-id }}
 
-  #     - name: Display artifact content
-  #       run: cat report.txt
+      - name: Display artifact content
+        run: cat report.txt
         
   #     # - name: Download Generated Markdown Report
   #     #   uses: actions/download-artifact@v4
