@@ -21,6 +21,7 @@ jobs:
       conclusion: ${{ steps.set-conclusion.outputs.conclusion }}
     steps:
       - name: Wait for code coverage to complete
+        id: wait-for-coverage
         uses: ArcticLampyrid/action-wait-for-workflow@v1.2.0
         with:
           workflow: code_coverage.yml
@@ -33,6 +34,9 @@ jobs:
       - name: Set Conclusion Output
         id: set-conclusion
         run: |
+          echo "steps: ${{ steps }}"
+          echo "Wait for coverage: ${{ steps.wait-for-coverage }}"
+          echo "outputs: ${{ steps.wait-for-coverage.outputs }}"
           echo "conclusion: ${{ steps.wait-for-coverage.outputs.conclusion }}"
           echo "::set-output name=conclusion::${{ steps.wait-for-coverage.outputs.conclusion }}"
 
