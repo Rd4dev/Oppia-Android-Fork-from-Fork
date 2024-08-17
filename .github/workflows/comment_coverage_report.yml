@@ -42,7 +42,7 @@ jobs:
             const runsResponse = await github.rest.actions.listWorkflowRuns({
               owner,
               repo,
-              workflow_id: 'c3.yml', 
+              workflow_id: 'code_coverage.yml', 
               event: 'pull_request',
               head_sha: '${{ github.event.pull_request.head.sha }}',
               status: 'success'
