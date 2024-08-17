@@ -63,6 +63,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: final-coverage-report
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ steps.find-workflow-run.outputs.run-id }}
 
       - name: Upload Coverage Report as PR Comment
         uses: peter-evans/create-or-update-comment@v4
