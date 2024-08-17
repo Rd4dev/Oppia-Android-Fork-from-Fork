@@ -23,7 +23,10 @@ jobs:
         with:
           workflow: code_coverage.yml
           sha: auto
-          allowed-conclusions: success,skipped,failure
+          allowed-conclusions: |
+            success
+            neutral
+            failure
 
   publish_coverage_report:
     name: Publish Code Coverage Report
