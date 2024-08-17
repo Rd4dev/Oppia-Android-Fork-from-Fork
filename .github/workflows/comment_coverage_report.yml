@@ -17,8 +17,6 @@ jobs:
   check_code_coverage_completed:
     name: Check code coverage completed
     runs-on: ubuntu-latest
-    outputs:
-      conclusion: ${{ steps.set-conclusion.outputs.conclusion }}
     steps:
       - name: Wait for code coverage to complete
         id: wait-for-coverage
@@ -28,22 +26,12 @@ jobs:
           sha: auto
           allowed-conclusions: |
             success
-            neutral
             failure
-
-      - name: Set Conclusion Output
-        id: set-conclusion
-        run: |
-          echo "steps: ${{ steps }}"
-          echo "Wait for coverage: ${{ steps.wait-for-coverage }}"
-          echo "outputs: ${{ steps.wait-for-coverage.outputs }}"
-          echo "conclusion: ${{ steps.wait-for-coverage.outputs.conclusion }}"
-          echo "::set-output name=conclusion::${{ steps.wait-for-coverage.outputs.conclusion }}"
 
   publish_coverage_report:
     name: Publish Code Coverage Report
-    if: ${{ needs.check_code_coverage_completed.outputs.conclusion != 'neutral' }}
     needs: check_code_coverage_completed
+    if: ${{ needs.check_code_coverage_completed.result == 'success' }}
     permissions:
       pull-requests: write
     runs-on: ubuntu-latest
