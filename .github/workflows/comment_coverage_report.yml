@@ -28,8 +28,15 @@ jobs:
             neutral
             failure
 
+      - name: Set Conclusion Output
+        id: set-conclusion
+        run: |
+          echo "conclusion: ${{ steps.wait-for-coverage.outputs.conclusion }}"
+          echo "::set-output name=conclusion::${{ steps.wait-for-coverage.outputs.conclusion }}"
+
   publish_coverage_report:
     name: Publish Code Coverage Report
+    if: ${{ needs.check_code_coverage_completed.outputs.conclusion != 'neutral' }}
     needs: check_code_coverage_completed
     permissions:
       pull-requests: write
