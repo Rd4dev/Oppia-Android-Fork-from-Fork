@@ -18,7 +18,7 @@ jobs:
     name: Check code coverage completed
     runs-on: ubuntu-latest
     outputs:
-      conclusion: ${{ steps.wait-for-coverage.outputs.conclusion }}
+      conclusion: ${{ steps.set-conclusion.outputs.conclusion }}
     steps:
       - name: Wait for code coverage to complete
         uses: ArcticLampyrid/action-wait-for-workflow@v1.2.0
