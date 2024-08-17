@@ -32,11 +32,11 @@ class ComputeAabDifferencesTest {
 
   @Test
   fun testComputeBuildStats_forZeroProfiles_returnsEmptyStats() {
-    // val differencesUtility = createComputeAabDifferences()
+    val differencesUtility = createComputeAabDifferences()
 
-    // val stats = differencesUtility.computeBuildStats()
+    val stats = differencesUtility.computeBuildStats()
 
-    // assertThat(stats.aabStats).isEmpty()
+    assertThat(stats.aabStats).isEmpty()
   }
 
   @Test
