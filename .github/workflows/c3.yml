@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Create artifact A3
-        run: echo "This is an artifact from C3 4" > report.txt
+        run: echo "This is an artifact from C3 4 After access" > report.txt
 
       - name: Uploading A3 as artifact
         uses: actions/upload-artifact@v4
