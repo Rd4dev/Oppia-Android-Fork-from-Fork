@@ -128,16 +128,47 @@ jobs:
     if: ${{ !cancelled() }}  
     runs-on: ubuntu-latest
     steps:
-      - name: Download Generated Markdown Report
-        uses: actions/download-artifact@v4
-        with:
-          name: final-coverage-report
+    - name: Download Generated Markdown Report
+      uses: actions/download-artifact@v4
+      with:
+        name: final-coverage-report
+  
+    - name: Prepare Coverage Report Comment
+      run: |
+        {
+          echo '## Coverage Report'
+          echo ''
+          echo '### Results'
+          echo ''
+          echo 'Coverage Analysis: **SKIP** :next_track_button:'
+          echo ''
+          echo '_This PR did not introduce any changes to Kotlin source or test files._'
+          echo ''
+          echo '#'
+          echo ''
+          echo '>To learn more, visit the [Oppia Android Code Coverage](https://github.com/oppia/oppia-android/wiki/Oppia-Android-Code-Coverage) wiki page'
+        } > comment_body.md
+        if [[ "${{ needs.evaluate-code-coverage-reports.outputs.pb_file_empty }}" != "true" ]]; then
+          cat CoverageReport.md > comment_body.md
+        fi
 
-      - name: Upload Coverage Report as PR Comment
-        uses: peter-evans/create-or-update-comment@v4
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          body-path: 'CoverageReport.md'
+    - name: Upload Coverage Report as PR Comment
+      uses: peter-evans/create-or-update-comment@v4
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        body-path: 'comment_body.md'
+      
+    # steps:
+    #   - name: Download Generated Markdown Report
+    #     uses: actions/download-artifact@v4
+    #     with:
+    #       name: final-coverage-report
+
+    #   - name: Upload Coverage Report as PR Comment
+    #     uses: peter-evans/create-or-update-comment@v4
+    #     with:
+    #       issue-number: ${{ github.event.pull_request.number }}
+    #       body-path: 'CoverageReport.md'
           
   # Reference: https://github.community/t/127354/7.
   check_coverage_results:
