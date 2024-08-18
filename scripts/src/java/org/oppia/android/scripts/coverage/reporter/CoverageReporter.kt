@@ -508,7 +508,7 @@ class CoverageReporter(
     val wikiPageLinkNote = buildString {
       val wikiPageReferenceNote = ">To learn more, visit the [Oppia Android Code Coverage]" +
         "(https://github.com/oppia/oppia-android/wiki/Oppia-Android-Code-Coverage) wiki page"
-      append("\n")
+      append("\n\n")
       append("#")
       append("\n")
       append(wikiPageReferenceNote)
