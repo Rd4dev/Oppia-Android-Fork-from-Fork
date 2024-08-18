@@ -108,6 +108,24 @@ jobs:
           name: final-coverage-report
           path: coverage_reports/CoverageReport.md
 
+  publish_coverage_report:
+    name: Publish Code Coverage Report
+    needs: evaluate-code-coverage-reports
+    permissions:
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Generated Markdown Report
+        uses: actions/download-artifact@v4
+        with:
+          name: final-coverage-report
+
+      - name: Upload Coverage Report as PR Comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body-path: 'CoverageReport.md'
+          
   # Reference: https://github.community/t/127354/7.
   check_coverage_results:
     name: Check Code Coverage Results
@@ -124,23 +142,3 @@ jobs:
       - name: Check that coverage status is passed
         if: ${{ needs.compute_changed_files.outputs.can_skip_files != 'true' && needs.evaluate-code-coverage-reports.result != 'success' }}
         run: exit 1
-
-  publish_coverage_report:
-    name: Publish Code Coverage Report
-    needs: check_code_coverage_completed
-    if: ${{ needs.check_code_coverage_completed.result == 'success' }}
-    permissions:
-      pull-requests: write
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download Generated Markdown Report
-        uses: actions/download-artifact@v4
-        with:
-          name: final-coverage-report
-
-      - name: Upload Coverage Report as PR Comment
-        uses: peter-evans/create-or-update-comment@v4
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          body-path: 'CoverageReport.md'
-    
