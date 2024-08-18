@@ -2,8 +2,8 @@
 
 name: Stats Checks & Reports
 
-# on:
-#   workflow_dispatch:
+on:
+  workflow_dispatch:
 #   schedule:
 #     - cron: "30 02 * * *"
 
