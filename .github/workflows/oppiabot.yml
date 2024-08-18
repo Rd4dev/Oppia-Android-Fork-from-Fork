@@ -2,10 +2,10 @@
 
 name: Oppiabot
 
-on:
-  pull_request_target:
-    branches:
-      - develop
+# on:
+#   pull_request_target:
+#     branches:
+#       - develop
 
 jobs:
   oppiabot:
