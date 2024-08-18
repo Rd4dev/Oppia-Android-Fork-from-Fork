@@ -6,7 +6,7 @@ import java.security.MessageDigest
 
 /**
  * Represents a set of LaTeX that can be rendered as a single bitmap.
- *
+ *MathModel
  * @property rawLatex the LaTeX to render
  * @property lineHeight the height (in pixels) of a text line (to help scale the LaTeX)
  * @property useInlineRendering whether the LaTeX will be inlined with text
