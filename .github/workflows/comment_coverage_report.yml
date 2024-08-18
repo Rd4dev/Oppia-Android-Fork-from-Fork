@@ -125,7 +125,7 @@ jobs:
 
     # The expression if: ${{ !cancelled() }} runs a job or step regardless of its success or failure while responding to cancellations,
     # serving as a cancellation-compliant alternative to if: ${{ always() }} in concurrent workflows.
-    if: ${{ !cancelled() }}  
+    if: ${{ !cancelled() && needs.evaluate-code-coverage-reports.outputs.pb_file_empty != 'true' }}  
     runs-on: ubuntu-latest
     steps:
       - name: Download Generated Markdown Report
