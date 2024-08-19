@@ -5,7 +5,7 @@ import org.oppia.android.app.utility.datetime.DateTimeUtil
 
 /**
  * Root subcomponent for all activities.
- *
+ * Triggering for concurrency
  * Instances of this subcomponent should be created using [ActivityComponentFactory].
  */
 interface ActivityComponent : AppLanguageActivityInjector, DateTimeUtil.Injector
