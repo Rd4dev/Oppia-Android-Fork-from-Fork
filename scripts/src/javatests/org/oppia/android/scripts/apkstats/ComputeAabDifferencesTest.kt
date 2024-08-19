@@ -30,14 +30,14 @@ class ComputeAabDifferencesTest {
     scriptBgDispatcher.close()
   }
 
-  // @Test
-  // fun testComputeBuildStats_forZeroProfiles_returnsEmptyStats() {
-  //   val differencesUtility = createComputeAabDifferences()
+  @Test
+  fun testComputeBuildStats_forZeroProfiles_returnsEmptyStats() {
+    val differencesUtility = createComputeAabDifferences()
 
-  //   val stats = differencesUtility.computeBuildStats()
+    val stats = differencesUtility.computeBuildStats()
 
-  //   assertThat(stats.aabStats).isEmpty()
-  // }
+    assertThat(stats.aabStats).isEmpty()
+  }
 
   @Test
   fun testComputeBuildStats_forProfileWithMissingFiles_throwsException() {
