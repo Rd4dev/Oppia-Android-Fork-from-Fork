@@ -525,7 +525,7 @@ class CoverageReporter(
           failureMarkdownTable +
           failureMarkdownEntries +
           successMarkdownEntries +
-          testFileExemptedSection +
+          testFileExemptedSection 
           // wikiPageLinkNote
       } ?: skipCoverageReportText
 
