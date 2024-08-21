@@ -24,9 +24,6 @@ jobs:
         with:
           workflow: code_coverage.yml
           sha: auto
-          allowed-conclusions: |
-            success
-            failure
 
   evaluate-code-coverage-reports:
     name: Evaluate Code Coverage Reports
