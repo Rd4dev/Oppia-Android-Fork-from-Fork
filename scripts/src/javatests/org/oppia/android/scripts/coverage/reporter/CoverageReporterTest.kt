@@ -372,7 +372,7 @@ class CoverageReporterTest {
         "| ${getFilenameAsDetailsSummary(lowCoverageRequiredFilePath)} | " +
           "40.00% | 4 / 10 | :white_check_mark: | 0% _*_ |\n"
       )
-      append("\n>**_*_** represents tests with custom overridden pass/fail coverage thresholds\n")
+      append("\n>represents tests with custom overridden pass/fail coverage thresholds\n")
       append("</details>")
     }
 
