@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 const val TAG_HOME_FRAGMENT = "HOME_FRAGMENT"
 
-/** The presenter for [HomeActivity_]. */
+/** The presenter for [HomeActivity]. */
 @ActivityScope
 class HomeActivityPresenter @Inject constructor(private val activity: AppCompatActivity) {
   private var navigationDrawerFragment: NavigationDrawerFragment? = null
