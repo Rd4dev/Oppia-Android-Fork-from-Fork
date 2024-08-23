@@ -14,7 +14,7 @@ import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/** Wrapper class for Android logcat and file logging. All logs in the app should use this class. */
+/** Wrapper - class for Android logcat and file logging. All logs in the app should use this class. */
 @Singleton
 class ConsoleLogger @Inject constructor(
   context: Context,
