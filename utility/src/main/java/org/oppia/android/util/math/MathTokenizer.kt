@@ -25,7 +25,7 @@ class MathTokenizer private constructor() {
   companion object {
     /**
      * Returns a [Sequence] of [Token]s for the specified input string.
-     *
+     * Token
      * Note that this tokenizer will attempt to recover if an invalid token is encountered (i.e.
      * tokenization will continue). Further, tokenization occurs lazily (i.e. as the sequence is
      * traversed), so calling this method is essentially zero-cost until tokens are actually needed.
