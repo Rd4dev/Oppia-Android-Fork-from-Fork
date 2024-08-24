@@ -18,7 +18,7 @@ import java.lang.StringBuilder
  * See https://docs.google.com/document/d/1JMpbjqRqdEpye67HvDoqBo_rtScY9oEaB7SwKBBspss/edit for the
  * grammar specification supported by this tokenizer.
  *
- * This class implements an LL(1) single-pass tokenizer with no caching. Use [tokenize] to produce a
+ * This class implements an LL(1) single-pass tokenizer with no caching. - Use [tokenize] to produce a
  * sequence of [Token]s from the given input stream.
  */
 class MathTokenizer private constructor() {
