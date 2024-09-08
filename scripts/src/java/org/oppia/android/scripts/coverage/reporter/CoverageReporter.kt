@@ -514,6 +514,8 @@ class CoverageReporter(
     //   append(wikiPageReferenceNote)
     // }
 
+    // comment1
+
     val finalReportText = coverageReportContainer.coverageReportList.takeIf { it.isNotEmpty() }
       ?.let {
         "## Coverage Report\n\n" +
