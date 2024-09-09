@@ -19,7 +19,7 @@ private const val MAX_FILE_COUNT_PER_SMALL_SHARD = 15
 
 /**
  * The main entrypoint for computing the list of changed files based on changes in the local
- * Oppia Android Git repository 4.
+ * Oppia Android Git repository comment.
  *
  * Usage:
  *   bazel run //scripts:compute_changed_files -- \\
