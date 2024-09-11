@@ -11,7 +11,7 @@ import java.io.FileInputStream
  * Usage:
  *   bazel run //scripts:test_file_check -- <path_to_directory_root>
  *
- * Arguments:
+ * Arguments:cc
  * - path_to_directory_root: directory path to the root of the Oppia Android repository.
  *
  * Example:
