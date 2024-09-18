@@ -36,7 +36,7 @@ All new Android OS functionality changes (both those tied to ``targetSdkVersion`
 
 Any concerning changes or functionality that could be beneficial to Oppia Android should be noted in the tracking issue for the SDK upgrade (see https://github.com/oppia/oppia-android/issues/5137#issuecomment-1815241974 for a good example of this).
 
-**Tips**
+**High-Level Considerations**
 
 Note that narrowing down these categories isn't a process that can be easily described as a set of steps since new OS features may not even be predictable ahead of time. However, here are some tips that might help:
 - Look for changes in permissions. This could either be an old permission that's now more restricted, or existing SDK functionality that's now blocked by a new permission (both have occurred in past Android OS updates). If the functionalty and/or permission relates to Oppia Android, it should be noted. Note that some things may be tied to permissions and access control that's not obvious such as:
