@@ -77,7 +77,8 @@ The local version of the app should be deployed to an emulator (or a real device
 - Deploy the local version of the app to an emulator or a real device.
      
 2. **User Behavior Testing:**
-Any user behaviors that tie to the areas of concern noted in the tracking issue from part (2) should be explicitly tested to ensure they still behave correctly.
+
+- Any user behaviors that tie to the areas of concern noted in the tracking issue from part (2) should be explicitly tested to ensure they still behave correctly.
   - Note that in some cases this may require using both a handset and tablet emulator configuration if there are tablet-specific or layout-specific areas identified.
   - Note that #5137 may provide some good context on how to test certain types of changes that may not be as simple as manually performing a certain user action and may instead require a clever code change.
       
