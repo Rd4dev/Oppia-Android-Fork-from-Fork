@@ -95,7 +95,7 @@ Any user behaviors that tie to the areas of concern noted in the tracking issue 
   - Checking that concept and revision cards work correctly.
   - Verifying that events are logged (either per Firebase analytics if you have access, or the developer options menu using a build of ``//:oppia_dev``--note that ``oppia_dev`` should only be used for this specific verification and not any of the others).
       
-4. **Filing Problems:**
+4. **Filing Issues:**
 
 - Any breakages should be noted, and then checked against a version of the app without the target SDK. From there:
   - If the breakage still occurs, file a new bug noting the problem and mention in the 'additional context' section that it was found during target SDK testing but was determined as unrelated.
