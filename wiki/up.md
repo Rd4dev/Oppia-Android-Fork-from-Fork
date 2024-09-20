@@ -18,8 +18,6 @@ flowchart TD
     F(Part 6: Future work items and<br>upgrading Robolectric) -->|Future issues filed| G
     G(Finished)
     
-    style A fill:#f9f,stroke:#333,stroke-width:4px, width:500px;
-    style B fill:#ccf,stroke:#333,stroke-width:4px, width:200px;
 
 ```
 
