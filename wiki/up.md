@@ -13,6 +13,19 @@ flowchart TD
 
     classDef textWrap text-wrap: wrap;
 
+    A(Part 1: With Text Wrap property set to the node):::textWrap -->|Tracking issue exists| B
+    B(Part 1: Without Text Wrap property set to the node) -->|Tracking issue exists| C
+    
+
+```
+
+### Complete diagram
+
+```mermaid
+flowchart TD
+
+    classDef textWrap text-wrap: wrap;
+
     A(Part 1: Identifying the need to upgrade):::textWrap -->|Tracking issue exists| B:::textWrap
     B(Part 2: Auditing the Android OS changelog):::textWrap -->|Audit complete| C:::textWrap
     C(Part 3: Testing the app & filing problems):::textWrap -->|Testing finished & issues filed| D:::textWrap
@@ -23,7 +36,6 @@ flowchart TD
     
 
 ```
-
 ### Part 1: Identifying the need to upgrade
 
 There are generally three signals that may indicate the team should consider upgrading to a newer Android SDK target:
