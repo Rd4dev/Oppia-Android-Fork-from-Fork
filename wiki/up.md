@@ -10,13 +10,16 @@ This guide describes the high-level process for upgrading the app to a newer ver
 
 ```mermaid
 flowchart TD
-    A(Part 1: Identifying the need to upgrade) -->|Tracking issue exists| B
-    B(Part 2: Auditing the Android OS changelog) -->|Audit complete| C
-    C(Part 3: Testing the app &<br>filing problems) -->|Testing finished & issues filed| D
-    D(Part 4: Fixing and<br>stabilizing support) -->|All issues fixed| E
-    E(Part 5: Submitting the<br>upgrade) -->|Compile/target SDK<br>PR submitted| F
-    F(Part 6: Future work items and<br>upgrading Robolectric) -->|Future issues filed| G
-    G(Finished)
+
+    classDef textWrap text-wrap: wrap;
+
+    A(Part 1: Identifying the need to upgrade):::textWrap -->|Tracking issue exists| B:::textWrap
+    B(Part 2: Auditing the Android OS changelog):::textWrap -->|Audit complete| C:::textWrap
+    C(Part 3: Testing the app & filing problems):::textWrap -->|Testing finished & issues filed| D:::textWrap
+    D(Part 4: Fixing and<br>stabilizing support):::textWrap -->|All issues fixed| E:::textWrap
+    E(Part 5: Submitting the upgrade):::textWrap -->|Compile/target SDK PR submitted| F:::textWrap
+    F(Part 6: Future work items and upgrading Robolectric):::textWrap -->|Future issues filed| G:::textWrap
+    G(Finished):::textWrap
     
 
 ```
