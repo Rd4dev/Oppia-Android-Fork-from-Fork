@@ -2,9 +2,9 @@ This wiki page explains how to install Oppia Android on your local machine. If y
 
 **Note:** Once you have set up the app locally, you might want to contribute code to the repository. Please follow our [onboarding instructions](https://github.com/oppia/oppia-android/wiki/Contributing-to-Oppia-android#onboarding-instructions) to get started!
 
-## Table of Contents
+  ## Table of Contents
 
-- [Prepare developer environment](#prepare-developer-environment)
+- [Prepare developer environment :confetti_ball: 🎊](#prepare-developer-environment)
 - [Install oppia-android](#install-oppia-android)
 - [Run the app from Android Studio](#run-the-app-from-android-studio)
 - [Run the tests](#set-up-and-run-tests)
