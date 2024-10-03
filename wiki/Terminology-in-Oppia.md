@@ -47,7 +47,7 @@ C4 --> c6("Card-6")
 
 ## How to visit?
 
-### Concept Card🎊
+### Concept Card 🎊
 
 `Home` --> `Choose Topic` --> `Revision Tab` --> `Select revision card` --> `Goto hyperlink present in description text`
 
