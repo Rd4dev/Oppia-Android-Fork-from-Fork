@@ -45,7 +45,7 @@ C4 --> c6("Card-6")
 6. **Concept Card**: This is a non-story-based explanation of how to perform a particular skill. It serves as a reference/reminder for students who may have encountered the skill before but forgotten how to carry it out. These can be accessed from  the "Revision" tab or are linked within the chapter you are playing.
 7. **Question/QuestionPlayer**: This is a standalone question that may be used by students as part of a practice session.
 
-## How to visit?
+## How to visit? 🍦
 
 ### Concept Card 🎊
 
