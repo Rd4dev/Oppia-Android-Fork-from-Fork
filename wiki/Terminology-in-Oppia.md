@@ -47,11 +47,10 @@ C4 --> c6("Card-6")
 
 ## How to visit? 🍦
 ## How to visit? :icecream:
+## :icecream: How to visit? 
+## 🍦 How to visit? 
 
-## Step 4: Tidy up and celebrate! :confetti_ball:
-## Step 4: Tidy up and celebrate! 🎊
-
-### Concept Card 🎊
+### Concept Card
 
 `Home` --> `Choose Topic` --> `Revision Tab` --> `Select revision card` --> `Goto hyperlink present in description text`
 
