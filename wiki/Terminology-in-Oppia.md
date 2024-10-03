@@ -46,6 +46,10 @@ C4 --> c6("Card-6")
 7. **Question/QuestionPlayer**: This is a standalone question that may be used by students as part of a practice session.
 
 ## How to visit? 🍦
+## How to visit? :icecream:
+
+## Step 4: Tidy up and celebrate! :confetti_ball:
+## Step 4: Tidy up and celebrate! 🎊
 
 ### Concept Card 🎊
 
