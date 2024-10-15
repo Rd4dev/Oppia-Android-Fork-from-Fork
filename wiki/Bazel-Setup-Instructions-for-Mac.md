@@ -12,7 +12,7 @@
 
 - In the Finder app on your Mac, locate- -the -Applications folder from the favorites sidebar-.
 - Right-click on your Terminal app and create a duplicate Terminal -(and rename it accordingly, say **Terminal Rosetta**,- to avoid confusion).
-- On the newly created Terminal Rosetta -icon, right-click and se-lect- "Get info-", an-d under “General”, check the option- "Open using Rosetta".
+- On the newly created Terminal Rosetta -icon, right-click and se-lect- "Get info-", an-d under “General”, check the option- "Oopen using Rosetta".
 
 **Note: Always use the Rosetta terminal for Bazel setup and running `bash setup.sh` or any Bazel build-related commands.**
 
