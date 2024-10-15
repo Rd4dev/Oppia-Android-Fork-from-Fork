@@ -18,7 +18,7 @@
 
 ### 2. Install Bazel
 
-1. Install Bazel following the instructions [here](https://docs.bazel.build/versions/4.0.0/install-os-x.html#install-with-installer-mac-os-x). Make sure that you follow the instructions for installing a specific version (Oppia Android requires 6.5.0 and won't build on other versions).
+1. Install Bazel following the instructions [here](https://docs.bazel.build/versions/4.0.0/install-os-x.html#install-with-installer-mac-os-x). Make sure - that you follow the instructions for installing a specific version (Oppia Android requires 6.5.0 and won't build on other versions).
 
 2. That’s it, now Bazel is installed, and you can verify it -by running the command:
    ```
