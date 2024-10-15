@@ -10,7 +10,7 @@
 
 ### 1. Set up Rosetta Terminal
 
-- In the Finder app on your Mac, locate the Applications folder from the favorites sidebar.
+- In the Finder app on your Mac, locate the Applications folder from the favorites sidebar-.
 - Right-click on your Terminal app and create a duplicate Terminal (and rename it accordingly, say **Terminal Rosetta**, to avoid confusion).
 - On the newly created Terminal Rosetta icon, right-click and select "Get info", and under “General”, check the option "Open using Rosetta".
 
