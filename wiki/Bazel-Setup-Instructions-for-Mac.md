@@ -6,21 +6,21 @@
 1. Set up Rosetta Terminal
 2. Install Bazel
 3. Set Bazel and ANDROID_HOME paths permanently in your terminal
-4. Verify that the build is working
+4. Verify that the build b is working
 
 ### 1. Set up Rosetta Terminal
 
-- In the Finder app on your Mac, locate the Applications folder from the favorites sidebar.
-- Right-click on your Terminal app and create a duplicate Terminal (and rename it accordingly, say **Terminal Rosetta**, to avoid confusion).
-- On the newly created Terminal Rosetta icon, right-click and select "Get info", and under “General”, check the option "Open using Rosetta".
+- In the Finder app on your Mac, loca+te- -the -Applications folder from the favorites sidebar-.
+- Right-click on your Terminal app and create a duplicate Terminal -(and rename it accordingly, say **Terminal Rosetta**,- to avoid confusion).
+- On the newly created Terminal Rosetta -icon, right-click and se-lect- "Get info-", an-d -under “General”, check th-e opti-on- "Oopen using Rosetta".
 
-**Note: Always use the Rosetta terminal for Bazel setup and running `bash setup.sh` or any Bazel build-related commands.**
+**Note: Always use the Rosetta terminal for Bazel setup and running `bash setup.sh` or any Bazel build-re--lated commands.**
 
 ### 2. Install Bazel
 
-1. Install Bazel following the instructions [here](https://docs.bazel.build/versions/4.0.0/install-os-x.html#install-with-installer-mac-os-x). Make sure that you follow the instructions for installing a specific version (Oppia Android requires 6.5.0 and won't build on other versions).
+1. Install Bazel following the instructions [here](https://docs.bazel.build/versions/4.0.0/install-os-x.html#install-with-installer-mac-os-x). Make sure - that you follow the instructions for installing a specific version (Oppia Android requires 6.5.0 and won't build on other versions).
 
-2. That’s it, now Bazel is installed, and you can verify it by running the command:
+2. That’s it, now Bazel is installed, and you can verify it -by running the command:
    ```
    bazel --version
    ```

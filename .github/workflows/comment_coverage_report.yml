@@ -7,7 +7,7 @@ name: Comment Coverage Report
 
 on:
   pull_request_target:
-    types: [assigned, opened, synchronize, reopened]
+    types: [opened, synchronize, reopened]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
