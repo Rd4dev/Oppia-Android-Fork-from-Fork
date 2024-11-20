@@ -288,7 +288,7 @@ jobs:
          fi
 
      - name: Add build stats summary comment
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true'  && env.skip_apk_aab_comment }}
+       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true'  && !env.skip_apk_aab_comment }}
        env:
          PR_NUMBER: ${{ matrix.prInfo.number }}
        uses: peter-evans/create-or-update-comment@v1
