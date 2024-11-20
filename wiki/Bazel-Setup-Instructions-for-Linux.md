@@ -12,7 +12,7 @@ Install Bazel from [here](https://docs.bazel.build/versions/master/install.html)
 
 ### 2. Set up the ANDROID_HOME environment variable
 
-Ensure that your `ANDROID_HOME` environment variable is set to the location of your Android SDK. To do this, find the path to the installed SDK using Android Studio’s SDK Manager (install SDK 28). Assuming the SDK is installed to default locations, you can use the following commands to set the `ANDROID_HOME` variable:<br>
+Ensure that your `ANDROID_HOME` environment variable is set to the location of your Android SDK. To do this, find the path to the installed SDK using Android Studio’s SDK Manager (install SDK-28). Assuming the SDK is installed to default locations, you can use the following commands to set the `ANDROID_HOME` variable:<br>
    ```
    export ANDROID_HOME=$HOME/Android/Sdk/
    ```
