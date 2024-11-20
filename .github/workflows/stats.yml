@@ -81,7 +81,8 @@ jobs:
               repo: context.repo.repo,
               pull_number: ${{ matrix.prInfo.number }},
             });
-
+            
+            const latestCommentDate = ${{ steps.find_latest_apk_aab_comment.outputs.latest_aab_comment_created_at }}
             const recentCommits = commits.filter(commit => {
               const commitDate = new Date(commit.commit.committer.date);
               return commitDate > new Date("${{ steps.find_latest_apk_aab_comment.outputs.latest_aab_comment_created_at }}");
@@ -90,7 +91,7 @@ jobs:
 
             console.log(`Recent Commits count - ${recentCommitsCount}`); 
 
-            if(recentCommitsCount > 0 || !${{ steps.find_latest_apk_aab_comment.outputs.latest_aab_comment_created_at }}) {
+            if(recentCommitsCount > 0 || !latestCommentDate) {
               console.log("New commits found after the last apk & aab stat analysis");
               core.setOutput("new_commits", "true");
             } else {
