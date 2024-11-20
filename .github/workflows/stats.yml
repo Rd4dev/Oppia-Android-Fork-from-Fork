@@ -95,7 +95,7 @@ jobs:
               core.setOutput("new_commits", "true");
             } else {
               console.log("No new commits found after last apk & aab stat analysis");
-              core.setOutput("new_commits", "false");
+              core.setOutput("new_commits", "true");
             }
           
      - name: Compute PR head owner/repo reference
