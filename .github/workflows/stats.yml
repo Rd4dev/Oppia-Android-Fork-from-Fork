@@ -82,7 +82,7 @@ jobs:
               pull_number: ${{ matrix.prInfo.number }},
             });
             
-            const latestCommentDate = ${{ steps.find_latest_apk_aab_comment.outputs.latest_aab_comment_created_at }}
+            const latestCommentDate = "${{ steps.find_latest_apk_aab_comment.outputs.latest_aab_comment_created_at }}";
             const recentCommits = commits.filter(commit => {
               const commitDate = new Date(commit.commit.committer.date);
               return commitDate > new Date("${{ steps.find_latest_apk_aab_comment.outputs.latest_aab_comment_created_at }}");
