@@ -90,7 +90,7 @@ jobs:
 
             console.log(`Recent Commits count - ${recentCommitsCount}`); 
 
-            if(recentCommitsCount > 0) {
+            if(recentCommitsCount > 0 || !${{ steps.find_latest_apk_aab_comment.outputs.latest_aab_comment_created_at }}) {
               console.log("New commits found after the last apk & aab stat analysis");
               core.setOutput("new_commits", "true");
             } else {
