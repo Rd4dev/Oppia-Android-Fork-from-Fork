@@ -283,7 +283,7 @@ jobs:
            echo "skip_apk_aab_comment=true" >> $GITHUB_ENV
          else
            echo "Changes detected; proceeding with the apk aab analysis comment."
-           diff ./develop/brief_build_summary.log ${{ steps.find_latest_apk_aab_comment.outputs.commentBody }} || true
+           diff ./develop/brief_build_summary.log latest_aab_comment_body.log || true
            echo "skip_apk_aab_comment=false" >> $GITHUB_ENV
          fi
 
