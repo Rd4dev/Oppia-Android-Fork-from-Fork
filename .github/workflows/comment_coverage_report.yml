@@ -39,6 +39,29 @@ jobs:
     if: ${{ !cancelled() }}  
     runs-on: ubuntu-latest   
     steps:
+      - name: Find the latest Code Coverage comment 
+        uses: actions/github-script@v6
+        id: find_latest_code_coverage_comment
+        with:
+           script: |
+             const fs = require('fs');
+             const comments = await github.paginate(github.rest.issues.listComments, {
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               issue_number: ${{ matrix.prInfo.number }},
+             });            
+
+             for (let i = comments.length - 1; i >= 0; i--) {
+               if (comments[i].body.includes("Coverage Report")) {
+                 const latestCodeCoverageComment = comments[i];
+                 const commentBody = latestCodeCoverageComment.body;
+                 console.log(`Latest Code Coverage Comment Body: ${commentBody}`);
+                 fs.writeFileSync('latest_code_coverage_comment_body.md', commentBody, 'utf8');
+                 
+                 return
+               }
+             }
+            
       - name: Find the last Coverage Report
         uses: peter-evans/find-comment@v3
         id: last-coverage-report
@@ -87,9 +110,9 @@ jobs:
       - name: Compare coverage report with the comment body (workkkkk!!)
         run: |        
           sed -i -e '$a\' CoverageReport.md
-          sed -i -e '$a\' comment.md
+          sed -i -e '$a\' latest_code_coverage_comment_body.md
           
-          if diff -B CoverageReport.md comment.md > /dev/null; then
+          if diff -B CoverageReport.md latest_code_coverage_comment_body.md > /dev/null; then
             echo "No significant changes detected; skipping coverage comment."
             echo "skip_coverage_comment=true" >> $GITHUB_ENV
           else
