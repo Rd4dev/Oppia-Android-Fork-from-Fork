@@ -289,13 +289,13 @@ jobs:
              echo "skip_apk_aab_comment=false" >> $GITHUB_ENV
            fi
          else
-           # File does not exist, skip analysis
-           echo "No 'latest_aab_comment_body.log' found; skipping apk aab analysis comment."
+           # File does not exist, post apk aab analysis comment
+           echo "No 'latest_aab_comment_body.log' found; introducing apk aab analysis comment."
            echo "skip_apk_aab_comment=false" >> $GITHUB_ENV
          fi
 
      - name: Add build stats summary comment
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true'  && !env.skip_apk_aab_comment }}
+       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true'  && env.skip_apk_aab_comment == 'false' }}
        env:
          PR_NUMBER: ${{ matrix.prInfo.number }}
        uses: peter-evans/create-or-update-comment@v1
