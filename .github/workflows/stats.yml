@@ -284,8 +284,7 @@ jobs:
              echo "skip_apk_aab_comment=false" >> $GITHUB_ENV
            fi
          else
-           # File does not exist, post apk aab analysis comment
-           echo "No 'latest_aab_comment_body.log' found; introducing apk aab analysis comment."
+           echo "No previous APK & AAB report posted; Commenting analysed APK & AAB report."
            echo "skip_apk_aab_comment=false" >> $GITHUB_ENV
          fi
 
