@@ -268,28 +268,8 @@ jobs:
          echo "FULL_BUILD_SUMMARY_FILE_PATH=$FULL_BUILD_SUMMARY_FILE_PATH" >> "$GITHUB_ENV"
          cp "$GITHUB_WORKSPACE/develop/full_build_summary.log" "$FULL_BUILD_SUMMARY_FILE_PATH"
 
-     - name: Compare Generated APK & AAB Analysis with the Previous Report
-       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
-       run: |        
-         if [ -f latest_aab_comment_body.log ]; then
-           sed -i -e '$a\' ./develop/brief_build_summary.log
-           sed -i -e '$a\' latest_aab_comment_body.log
-         
-           if diff -B ./develop/brief_build_summary.log latest_aab_comment_body.log > /dev/null; then
-             echo "No significant changes detected; skipping apk aab analysis comment."
-             echo "skip_apk_aab_comment=true" >> $GITHUB_ENV
-           else
-             echo "Changes detected; proceeding with the apk aab analysis comment."
-             diff ./develop/brief_build_summary.log latest_aab_comment_body.log || true
-             echo "skip_apk_aab_comment=false" >> $GITHUB_ENV
-           fi
-         else
-           echo "No previous APK & AAB report posted; Commenting analysed APK & AAB report."
-           echo "skip_apk_aab_comment=false" >> $GITHUB_ENV
-         fi
-
      - name: Add build stats summary comment
-       if: ${{ steps.track_commits.outputs.new_commits == 'true'  && env.skip_apk_aab_comment == 'false' }}
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        env:
          PR_NUMBER: ${{ matrix.prInfo.number }}
        uses: peter-evans/create-or-update-comment@v1
