@@ -42,12 +42,11 @@ jobs:
      ENABLE_CACHING: false
      CACHE_DIRECTORY: ~/.bazel_cache
    steps:
-     - name: Find the latest APK & AAB Analysis comment 
+     - name: Find the latest APK & AAB Analysis Comment 
        uses: actions/github-script@v6
        id: find_latest_apk_aab_comment
        with:
           script: |
-            const fs = require('fs');
             const comments = await github.paginate(github.rest.issues.listComments, {
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -60,20 +59,16 @@ jobs:
                 const commentBody = latestComment.body;
                 const commentDate = latestComment.created_at;
 
-                console.log(`Latest AAB Comment Body: ${commentBody}`);
-                console.log(`Posted At: ${commentDate}`);
-
-                fs.writeFileSync('latest_aab_comment_body.log', commentBody, 'utf8');
-                core.setOutput("latest_aab_comment_body", commentBody);
+                require('fs').writeFileSync('latest_aab_comment_body.log', commentBody, 'utf8');
                 core.setOutput("latest_aab_comment_created_at", commentDate);
                 
                 return
               }
             }
 
-     - name: Check for new commits after the latest APK & AAB Analysis comment 
+     - name: Track Commits following the latest APK & AAB Analysis Comment
        uses: actions/github-script@v6
-       id: check_commits_after_latest_apk_aab_comment
+       id: track_commits
        with:
           script: |
             const commits = await github.paginate(github.rest.pulls.listCommits, {
@@ -87,26 +82,24 @@ jobs:
               const commitDate = new Date(commit.commit.committer.date);
               return commitDate > new Date("${{ steps.find_latest_apk_aab_comment.outputs.latest_aab_comment_created_at }}");
             });
+            
             const recentCommitsCount = recentCommits.length;
-
-            console.log(`Recent Commits count - ${recentCommitsCount}`); 
-
             if(recentCommitsCount > 0 || !latestCommentDate) {
-              console.log("New commits found after the last apk & aab stat analysis");
               core.setOutput("new_commits", "true");
             } else {
-              console.log("No new commits found after last apk & aab stat analysis");
               core.setOutput("new_commits", "false");
             }
           
      - name: Compute PR head owner/repo reference
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true' }}
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        env:
          PR_HEAD_REPO: ${{ matrix.prInfo.headRepository.name }}
          PR_HEAD_REPO_OWNER: ${{ matrix.prInfo.headRepositoryOwner.login }}
        run: |
          echo "PR_HEAD=$PR_HEAD_REPO_OWNER/$PR_HEAD_REPO" >> "$GITHUB_ENV"
+         
      - name: Print PR information for this run
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        env:
          PR_BASE_REF_NAME: ${{ matrix.prInfo.baseRefName }}
          PR_HEAD_REF_NAME: ${{ matrix.prInfo.headRefName }}
@@ -115,13 +108,13 @@ jobs:
          echo "PR $PR_NUMBER is merging into $PR_BASE_REF_NAME from https://github.com/$PR_HEAD branch $PR_HEAD_REF_NAME."
 
      - name: Set up JDK 11
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true' }}
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        uses: actions/setup-java@v1
        with:
          java-version: 11
 
      - name: Set up Bazel
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true' }}
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        uses: abhinavsingh/setup-bazel@v3
        with:
          version: 6.5.0
@@ -133,7 +126,7 @@ jobs:
      # benefit from incremental build performance (assuming that actions/cache aggressively removes
      # older caches due to the 5GB cache limit size & Bazel's large cache size).
      - uses: actions/cache@v2
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true' }}
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        id: cache
        with:
          path: ${{ env.CACHE_DIRECTORY }}
@@ -148,6 +141,7 @@ jobs:
      # few slower CI actions around the time cache is detected to be too large, but it should
      # incrementally improve thereafter.
      - name: Ensure cache size
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        env:
          BAZEL_CACHE_DIR: ${{ env.CACHE_DIRECTORY }}
        run: |
@@ -166,7 +160,7 @@ jobs:
          fi
 
      - name: Configure Bazel to use a local cache
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true' }}
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        env:
          BAZEL_CACHE_DIR: ${{ env.CACHE_DIRECTORY }}
        run: |
@@ -179,23 +173,23 @@ jobs:
      # run from the latest develop rather than the base branch (which might be different for
      # chained PRs).
      - name: Check out develop repository
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true' }}
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        uses: actions/checkout@v4
        with:
          path: develop
 
      - name: Set up build environment
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true' }}
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        uses: ./develop/.github/actions/set-up-android-bazel-build-environment
 
      - name: Check Bazel environment
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true' }}
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        run: |
          cd develop
          bazel info
 
      - name: Check out base repository and branch
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true' }}
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        env:
          PR_BASE_REF_NAME: ${{ matrix.prInfo.baseRefName }}
        uses: actions/checkout@v4
@@ -205,7 +199,7 @@ jobs:
          path: base
 
      - name: Check out head repository and branch
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true' }}
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        env:
          PR_HEAD_REF_NAME: ${{ matrix.prInfo.headRefName }}
        uses: actions/checkout@v4
@@ -219,7 +213,7 @@ jobs:
      # up being active (due to multiple repositories being used) and this can quickly overwhelm CI
      # worker resources.
      - name: Build Oppia dev, alpha, beta, and GA (feature branch)
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true' }}
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        run: |
          cd head
          git log -n 1
@@ -231,7 +225,7 @@ jobs:
          bazel shutdown
 
      - name: Build Oppia dev, alpha, beta, and GA (base branch)
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true' }}
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        run: |
          cd base
          git log -n 1
@@ -243,7 +237,7 @@ jobs:
          bazel shutdown
 
      - name: Run stats analysis tool (develop branch)
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true' }}
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        run: |
          cd develop
          git log -n 1
@@ -257,7 +251,7 @@ jobs:
      # Reference: https://github.com/peter-evans/create-or-update-comment#setting-the-comment-body-from-a-file.
      # Also, for multi-line env values, see: https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings.
      - name: Extract reports for uploading & commenting
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true' }}
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        env:
          PR_NUMBER: ${{ matrix.prInfo.number }}
        id: compute-comment-body
@@ -273,8 +267,8 @@ jobs:
          echo "FULL_BUILD_SUMMARY_FILE_PATH=$FULL_BUILD_SUMMARY_FILE_PATH" >> "$GITHUB_ENV"
          cp "$GITHUB_WORKSPACE/develop/full_build_summary.log" "$FULL_BUILD_SUMMARY_FILE_PATH"
 
-     - name: Compare apk aab analysis with the previous report
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true' }}
+     - name: Compare Generated APK & AAB Analysis with the Previous Report
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        run: |        
          if [ -f latest_aab_comment_body.log ]; then
            sed -i -e '$a\' ./develop/brief_build_summary.log
@@ -295,7 +289,7 @@ jobs:
          fi
 
      - name: Add build stats summary comment
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true'  && env.skip_apk_aab_comment == 'false' }}
+       if: ${{ steps.track_commits.outputs.new_commits == 'true'  && env.skip_apk_aab_comment == 'false' }}
        env:
          PR_NUMBER: ${{ matrix.prInfo.number }}
        uses: peter-evans/create-or-update-comment@v1
@@ -304,7 +298,7 @@ jobs:
          body: ${{ steps.compute-comment-body.outputs.comment_body }}
 
      - uses: actions/upload-artifact@v4
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true' }}
+       if: ${{ steps.track_commits.outputs.new_commits == 'true' }}
        with:
          name: ${{ env.FULL_BUILD_SUMMARY_FILE_NAME }}
          path: ${{ env.FULL_BUILD_SUMMARY_FILE_PATH }}
