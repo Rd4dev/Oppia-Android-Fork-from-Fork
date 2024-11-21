@@ -50,7 +50,7 @@ jobs:
              });            
 
              for (let i = comments.length - 1; i >= 0; i--) {
-               if (comments[i].body.includes("Coverage Report")) {
+               if (comments[i].body.includes("## Coverage Report")) {
                  const latestCodeCoverageComment = comments[i].body;
                  require('fs').writeFileSync('latest_code_coverage_comment.md', latestCodeCoverageComment, 'utf8');
                  return
@@ -99,7 +99,7 @@ jobs:
             sed -i -e '$a\' latest_code_coverage_comment.md
           
             if diff -B CoverageReport.md latest_code_coverage_comment.md > /dev/null; then
-              echo "No significant changes detected; skipping coverage comment."
+              echo "No changes detected; skipping coverage comment."
               echo "skip_coverage_comment=true" >> $GITHUB_ENV
             else
               echo "Changes detected; proceeding with the coverage comment."
@@ -107,7 +107,7 @@ jobs:
               echo "skip_coverage_comment=false" >> $GITHUB_ENV
             fi
           else
-            echo "No previous coverage comment found; posting coverage comment."
+            echo "No previous coverage comment found to compare; posting evaluated coverage comment."
             echo "skip_coverage_comment=false" >> $GITHUB_ENV
           fi
 
