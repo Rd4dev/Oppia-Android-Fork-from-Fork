@@ -81,7 +81,8 @@ jobs:
               repo: context.repo.repo,
               pull_number: ${{ matrix.prInfo.number }},
             });
-
+            
+            const latestCommentDate = "${{ steps.find_latest_apk_aab_comment.outputs.latest_aab_comment_created_at }}";
             const recentCommits = commits.filter(commit => {
               const commitDate = new Date(commit.commit.committer.date);
               return commitDate > new Date("${{ steps.find_latest_apk_aab_comment.outputs.latest_aab_comment_created_at }}");
@@ -90,7 +91,7 @@ jobs:
 
             console.log(`Recent Commits count - ${recentCommitsCount}`); 
 
-            if(recentCommitsCount > 0) {
+            if(recentCommitsCount > 0 || !latestCommentDate) {
               console.log("New commits found after the last apk & aab stat analysis");
               core.setOutput("new_commits", "true");
             } else {
@@ -275,20 +276,26 @@ jobs:
      - name: Compare apk aab analysis with the previous report
        if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true' }}
        run: |        
-         sed -i -e '$a\' ./develop/brief_build_summary.log
-         sed -i -e '$a\' latest_aab_comment_body.log
+         if [ -f latest_aab_comment_body.log ]; then
+           sed -i -e '$a\' ./develop/brief_build_summary.log
+           sed -i -e '$a\' latest_aab_comment_body.log
          
-         if diff -B ./develop/brief_build_summary.log latest_aab_comment_body.log > /dev/null; then
-           echo "No significant changes detected; skipping apk aab analysis comment."
-           echo "skip_apk_aab_comment=true" >> $GITHUB_ENV
+           if diff -B ./develop/brief_build_summary.log latest_aab_comment_body.log > /dev/null; then
+             echo "No significant changes detected; skipping apk aab analysis comment."
+             echo "skip_apk_aab_comment=true" >> $GITHUB_ENV
+           else
+             echo "Changes detected; proceeding with the apk aab analysis comment."
+             diff ./develop/brief_build_summary.log latest_aab_comment_body.log || true
+             echo "skip_apk_aab_comment=false" >> $GITHUB_ENV
+           fi
          else
-           echo "Changes detected; proceeding with the apk aab analysis comment."
-           diff ./develop/brief_build_summary.log latest_aab_comment_body.log || true
+           # File does not exist, post apk aab analysis comment
+           echo "No 'latest_aab_comment_body.log' found; introducing apk aab analysis comment."
            echo "skip_apk_aab_comment=false" >> $GITHUB_ENV
          fi
 
      - name: Add build stats summary comment
-       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true'  && !env.skip_apk_aab_comment }}
+       if: ${{ steps.check_commits_after_latest_apk_aab_comment.outputs.new_commits == 'true'  && env.skip_apk_aab_comment == 'false' }}
        env:
          PR_NUMBER: ${{ matrix.prInfo.number }}
        uses: peter-evans/create-or-update-comment@v1
