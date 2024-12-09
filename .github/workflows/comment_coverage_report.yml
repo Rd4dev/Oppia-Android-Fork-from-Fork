@@ -110,7 +110,10 @@ jobs:
             echo "No previous coverage comment found to compare; posting evaluated coverage comment."
             echo "skip_coverage_comment=false" >> $GITHUB_ENV
           fi
-          echo "skip_coverage_comment is: $skip_coverage_comment"
+
+      - name: Print skip coverage outputc
+        run: |
+          echo "skip coverage comment is: ${{ env.skip_coverage_comment }}"
           
       - name: Upload Coverage Report as PR Comment
         if: ${{ env.skip_coverage_comment == 'false' }}
