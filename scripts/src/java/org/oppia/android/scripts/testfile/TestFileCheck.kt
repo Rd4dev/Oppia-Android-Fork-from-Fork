@@ -7,7 +7,7 @@ import java.io.FileInputStream
 
 /**
  * Script for ensuring that all production files have test files present.
- * TestFileCheck cc 3
+ * TestFileCheck cc 4
  * Usage:
  *   bazel run //scripts:test_file_check -- <path_to_directory_root>
  *
