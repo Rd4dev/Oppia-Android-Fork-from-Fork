@@ -110,8 +110,8 @@ jobs:
             echo "No previous coverage comment found to compare; posting evaluated coverage comment."
             echo "skip_coverage_comment = false" >> $GITHUB_ENV
           fi
-          echo "{{ env.skip_coverage_comment }}"
-
+          echo "skip_coverage_comment is: $skip_coverage_comment"
+          
       - name: Upload Coverage Report as PR Comment
         if: ${{ env.skip_coverage_comment == 'false' }}
         uses: peter-evans/create-or-update-comment@v4
