@@ -1,13 +1,19 @@
 name: ACR1
 
 on:
-  pull_request:
-
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Testing"
+        required: true
+        type: choice
+        options:
+          - staging
+          - production
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
-    environment: production 
     steps:
-      - name: Deployinggg....
-        run: echo "Deploying to production"
+      - name: Testing
+        run: echo "Testing..."
