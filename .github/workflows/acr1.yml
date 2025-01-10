@@ -1,0 +1,13 @@
+name: ACR1
+
+on:
+  pull_request:
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production 
+    steps:
+      - name: Deployinggg....
+        run: echo "Deploying to production"
