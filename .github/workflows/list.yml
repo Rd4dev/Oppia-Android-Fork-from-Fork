@@ -1,0 +1,21 @@
+name: List
+
+on:
+  workflow_dispatch:
+
+jobs:
+  list:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lists
+        id: list
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const list = await github.rest.projects.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            console.log(`List Projects: ${list}`);
+            console.log(`List Projects: ${JSON.stringify(list, null, 2)}`);
