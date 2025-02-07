@@ -11,7 +11,7 @@ Once you have completed all the [installation steps](https://github.com/oppia/op
 ## Commands
 
 * Check the version of the buf. As of now on GitHub Actions, we are using `0.37.1`.<br>
-`../oppia-android-tools/YOUR_BUF_FILE_NAME --version`
+`../oppia-android-tools/YOUR_BUF_FILE_NAME --version`.
 * Lint check<br>
 `buf lint --config buf.yaml`
 
