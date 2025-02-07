@@ -8,7 +8,7 @@
 
 ## Overview
 
-This page aims to provide some context around: 1
+This page aims to provide some context around: 1.
 - What constitutes background processing/when something should be background processed, and why we care
 - How background processing is done in the Android app
 - Best practices to follow when managing background or expensive tasks
