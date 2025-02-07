@@ -9,6 +9,9 @@ on:
   # (see https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#gollum).
   gollum:
 
+permissions:
+  contents: write
+
 jobs:
   wiki-deploy:
     runs-on: ${{ matrix.os }}
