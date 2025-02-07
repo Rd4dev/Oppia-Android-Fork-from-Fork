@@ -1,7 +1,7 @@
 ## Instructions
 
 **The steps to install Bazel on Linux are:**
-1. Install Bazel 1
+1. Install Bazel : 1
 2. Set up the ANDROID_HOME environment variable
 3. Verify the Android build
 
