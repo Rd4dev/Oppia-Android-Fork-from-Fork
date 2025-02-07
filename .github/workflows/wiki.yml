@@ -22,6 +22,6 @@ jobs:
       - name: Add remote
         run: |
           git filter-branch --subdirectory-filter wiki/ -- --all
-          git remote set-url origin https://github.com/oppia/oppia-android.wiki.git
+          git remote set-url origin https://github.com/Rd4dev/Oppia-Android-Fork-from-Fork.wiki.git
           git checkout -b master
           git push origin master --force
