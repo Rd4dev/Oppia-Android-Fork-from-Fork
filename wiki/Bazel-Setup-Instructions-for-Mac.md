@@ -5,7 +5,7 @@
 **The steps to install Bazel on Mac are:**
 1. Set up Rosetta Terminal
 2. Install Bazel
-3. Set Bazel and ANDROID_HOME paths permanently in your terminal
+3. Set Bazel and ANDROID_HOME paths permanently in your terminal.
 4. Verify that the build is working
 
 ### 1. Set up Rosetta Terminal
