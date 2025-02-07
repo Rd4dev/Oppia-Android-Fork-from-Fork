@@ -5,7 +5,7 @@
 2. Set up the ANDROID_HOME environment variable
 3. Verify the Android build
 
-### 1. Install Bazel..
+### 1. Install Bazel...
 
 Install Bazel from [here](https://docs.bazel.build/versions/master/install.html). Make sure that you follow the instructions for installing a specific version (Oppia Android requires - 6.5.0 and won't build on other versions).
    - Note: if you find any errors related to `cURL`, please set up cURL on your machine. For Linux, you can use `sudo apt install curl`.
