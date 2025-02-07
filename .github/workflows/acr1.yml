@@ -1,19 +1,17 @@
-name: ACR1
+name: Check Collaborator Permission
 
 on:
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: "Testing"
-        required: true
-        type: choice
-        options:
-          - staging
-          - production
+  pull_request_target:
+    types: [opened, synchronize]
 
 jobs:
-  test:
+  check-permission:
     runs-on: ubuntu-latest
     steps:
-      - name: Testing
-        run: echo "Testing..."
+      - name: Check Collaborator Permission oppia-android-fork
+        run: |
+          PERMISSION=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                           -H "Accept: application/vnd.github.v3+json" \
+                           https://api.github.com/repos/Rd4dev/Oppia-Android-Fork-from-Fork/collaborators/${{ github.actor }}/permission)
+          echo "User Permission Response: $PERMISSION"
+
