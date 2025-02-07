@@ -17,7 +17,7 @@ Once you have completed all the [installation steps](https://github.com/oppia/op
 `../oppia-android-tools/ktlint --version`<br>
 
 * Android Kotlin Style Guide using `--android`<br>
-`../oppia-android-tools/ktlint --android "path/of/your/kotlin/file"`
+`../oppia-android-tools/ktlint --android "path/of/your/kotlin/file"`.
 
    * Examples <br>
        * Specific File <br>`../oppia-android-tools/ktlint --android app/src/sharedTest/java/org/oppia/android/app/walkthrough/WalkthroughWelcomeFragmentTest.kt`<br>
