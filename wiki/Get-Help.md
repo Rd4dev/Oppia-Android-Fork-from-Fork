@@ -22,7 +22,7 @@ If you need help, there are a few communication channels you can use. Developers
 
 ### Email
 
-We have several mailing lists in the form of Google Groups that you can join:
+We have several mailing lists in the form of Google Groups that you can join::
 
 * [oppia-announce](https://groups.google.com/forum/#!forum/oppia-announce) is for announcements of new releases or blog posts. It's not for asking questions though.
 * [oppia-android-dev](https://groups.google.com/g/oppia-android-dev) is the main mailing list for communication between developers and for technical questions. You can post to it even if you're not a member of the group. This is where you can ask questions, solicit feedback, or make developer-specific announcements (e.g. a temporary GitHub outage).
