@@ -15,3 +15,10 @@ jobs:
                            https://api.github.com/repos/Rd4dev/Oppia-Android-Fork-from-Fork/collaborators/${{ github.actor }}/permission)
           echo "User Permission Response: $PERMISSION"
 
+      - name: Check Collaborator Permission oppia-android
+        run: |
+          PERMISSION=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                           -H "Accept: application/vnd.github.v3+json" \
+                           https://api.github.com/repos/oppia/oppia-android/collaborators/${{ github.actor }}/permission)
+          echo "User Permission Response: $PERMISSION"
+
