@@ -17,7 +17,7 @@ Dagger creates the dependency graph using components and subcomponents
 - Components are top-level containers of providers that are pulled from modules that component is configured to include
 - Subcomponents are also containers, and may contain other subcomponents
 - Subcomponents automatically inherit all the dependencies from their parent components
-- Components/subcomponents can automatically collect dependencies for which they are scoped
+- Components/subcomponents can automatically collect dependencies for which they are scoped.
 
 ## Scopes
 Scopes are compile-time annotations associated both with a component/subcomponent and either injectable objects or providers of objects
