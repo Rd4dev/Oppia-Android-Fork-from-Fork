@@ -188,7 +188,7 @@ class PlatformParameterIntegrationTest {
   @Test
   fun testIntegration_updateEmptyDatabase_readDatabase_checkWelcomeMsgIsVisible() {
     platformParameterController.updatePlatformParameterDatabase(
-      mockPlatformParameterListWithToastEnabled
+      mockPlatformParameterListWithToastDisabled
     )
     testCoroutineDispatchers.runCurrent()
 
