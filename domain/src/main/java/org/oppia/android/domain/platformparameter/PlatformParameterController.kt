@@ -11,6 +11,7 @@ import org.oppia.android.util.data.DataProviders.Companion.transform
 import org.oppia.android.util.platformparameter.PlatformParameterSingleton
 import javax.inject.Inject
 import javax.inject.Singleton
+import java.lang.Thread
 
 /** Controller for fetching and updating platform parameters in the database. */
 @Singleton
@@ -38,17 +39,22 @@ class PlatformParameterController @Inject constructor(
   }
 
   private val platformParameterDataProvider by lazy {
-    // After this transformation the cached List of Platform Parameters gets converted into a simple
-    // map where the keys corresponds to the name of Platform Parameter and value will correspond to
-    // the PlatformParameter object itself
-    platformParameterDatabaseStore.transform(PLATFORM_PARAMETER_DATA_PROVIDER_ID) {
-      platformParameterDatabase ->
-      val platformParameterMap = mutableMapOf<String, PlatformParameter>()
+    platformParameterDatabaseStore.transform(PLATFORM_PARAMETER_DATA_PROVIDER_ID) { platformParameterDatabase ->
+      Thread.sleep(50000L)
+      var platformParameterMap = mutableMapOf<String, PlatformParameter>()
+
       platformParameterDatabase.platformParameterList.forEach {
         platformParameterMap[it.name] = it
       }
+
+      val mockSplashScreenWelcomeMsgParam = PlatformParameter.newBuilder()
+        .setName("splash_screen_welcome_msg")
+        .setBoolean(true)
+        .build()
+
+      platformParameterMap["splash_screen_welcome_msg"] = mockSplashScreenWelcomeMsgParam
+
       platformParameterSingleton.setPlatformParameterMap(platformParameterMap)
-      return@transform
     }
   }
 
