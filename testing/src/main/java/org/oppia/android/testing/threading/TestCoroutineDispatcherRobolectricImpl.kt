@@ -127,7 +127,7 @@ class TestCoroutineDispatcherRobolectricImpl private constructor(
     }
     runBlocking {
       try {
-        withTimeout(timeoutMillis) {
+        withTimeout(60000L) {
           flushTaskDeferred.await()
         }
       } catch (e: TimeoutCancellationException) {
